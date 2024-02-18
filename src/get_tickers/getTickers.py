@@ -64,3 +64,24 @@ plt.xlabel('Time (Days)')
 plt.ylabel('Portfolio Value (CAD)')
 plt.title('Monte Carlo sim of given portfolio')
 plt.show()
+
+#Will return the maximum value at risk for a given alpha (bottom alpha percent)
+def valueAtRisk(returns, alpha =5):
+    if isinstance(returns, pd.Series):
+        return np.percentile(returns, alpha)
+    else:
+        raise TypeError("Expected a data series input")
+
+def conditionalValueAtRisk(returns, alpha =5):
+    if isinstance(returns, pd.Series):
+        bottomValueAtRisk = returns <= valueAtRisk(returns, alpha=alpha)
+        return returns[bottomValueAtRisk].mean()
+    else:
+        raise TypeError("Expected a data series input")
+
+portfolioResults = pd.Series(simulatedReturns[-1,:])
+
+totalVaR = initialPortfolioVal -  valueAtRisk(portfolioResults, alpha=5)
+conditionalVaR = initialPortfolioVal - conditionalValueAtRisk(portfolioResults, alpha=5)
+
+print(f"The VaR of the given portfolio is ${round(totalVaR,2)} \nThe CVaR of the portfolio is ${round(conditionalVaR, 2)}")
