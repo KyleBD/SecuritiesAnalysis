@@ -26,6 +26,7 @@ class SimulatePortfolio:
         self.getData()
         self.weightReturns()
         self.monteCarloSimulation()
+        self.portfolioPerformance()
 
     def getData(self):
         stockData = pdr.get_data_yahoo(self.stocks, start=self.start, end=self.end)
@@ -34,11 +35,10 @@ class SimulatePortfolio:
         self.meanReturns = self.returns.mean()
         self.covMatrix = self.returns.cov()
 
-    '''
-    def portfolioPerformance(self, weights, meanReturns, covMatrix, Time):
-        self.returnsPerformance = np.sum(meanReturns*weights)*Time
-        self.std = np.sqrt( np.dot(weights.T, np.dot(covMatrix, weights)) ) * np.sqrt(Time)
-    '''
+
+    def portfolioPerformance(self):
+        self.returnsPerformance = np.sum(self.meanReturns*self.weights)*simTimeFrame
+        self.std = np.sqrt( np.dot(self.weights.T, np.dot(self.covMatrix, self.weights)) ) * np.sqrt(simTimeFrame)
 
 
     def weightReturns(self):
@@ -100,8 +100,8 @@ def main():
 
     totalVaR = initialPortfolioVal -  valueAtRisk(portfolioResults, alpha=5)
     conditionalVaR = initialPortfolioVal - conditionalValueAtRisk(portfolioResults, alpha=5)
-
-    print(f"The VaR of the given portfolio is ${round(totalVaR,2)} \nThe CVaR of the portfolio is ${round(conditionalVaR, 2)}")
+    avgReturn = simulatedPortfolio.returnsPerformance * initialPortfolioVal
+    print(f"The average return of the portfolio is ${round(avgReturn,2)} \nThe VaR of the given portfolio is ${round(totalVaR,2)} \nThe CVaR of the portfolio is ${round(conditionalVaR, 2)}")
 
 if __name__ == '__main__':
     main()
