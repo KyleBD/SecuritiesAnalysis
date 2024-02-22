@@ -1,5 +1,7 @@
-from getTickers import getSPFhundered
 import yfinance
+import requests
+from bs4 import BeautifulSoup
+from getTickers import getSPFhundered
 
 class stockData:
     def __init__(self) -> None:
@@ -97,3 +99,17 @@ class stockData:
             "financialCurrency": data['financialCurrency'],
             "trailingPegRatio": data['trailingPegRatio']
         }
+
+def tsxSecurities():
+    securitiesList = [];
+
+    url = "https://stockanalysis.com/list/toronto-stock-exchange/"
+    response = requests.get(url)
+
+    soup = BeautifulSoup(response.text, 'html.parser')
+    table = soup.find('table')
+    table = table.find_all('a', href=lambda href: href and '/quote/tsx/' in href)
+    for link in table:
+        securitiesList.append(link.text.strip())
+
+    return securitiesList
