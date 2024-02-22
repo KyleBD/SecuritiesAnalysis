@@ -12,14 +12,14 @@ yf.pdr_override()
 
 # ==============Define global variables============
 MonteCarloSims = 1000
-stockList = ['SU', 'T']
+stocks = ['TSLA', 'GME']
 #stocks = getSPFhundered()
 simTimeFrame = 50
 initialPortfolioVal = 10000 #Initial value in dollars.
 #==================================================
 
 #Chose stocks on the TSX
-stocks = [stock +'.TO' for stock in stockList]
+#stocks = [stock +'.TO' for stock in stockList]
 
 class SimulatePortfolio:
 
