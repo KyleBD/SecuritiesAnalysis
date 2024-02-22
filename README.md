@@ -2,7 +2,7 @@
 The goal of the project is to create a backend using Flask that will write to a React front end. On the back end there will be calculations in a Monte Carlo simulation for a selected portoflio of securities. As well as the ability to list current stocks on the TSX ranked by certain metrics including: EPS, P/E, PEG, among others.
 
 ## Monte Carlo Simulation
-Why use the Monte Carlo simulation? The simple answer is that the market does not have a determanistic solution. To account for this a MC simulation allows for the introduction of a random variable in a given range to make up for those uncertainties. The method of calculation that I chose to use was variance-covarience, in which I calculated the covarience of the mean returns over my desired time interval. I then am able to use the Cholesky Decomposition to introduce correlation into my simulation.
+Why use the Monte Carlo simulation? The simple answer is that the market does not have a determanistic solution. To account for this a MC simulation allows for the introduction of a random variable in a given range to make up for those uncertainties. The method of calculation that I chose to use was variance-covarience, in which I calculated the covarience of the mean returns over my desired time interval. I then am able to use the Cholesky Decomposition to introduce correlation into my simulation.<br>
 <img width="623" alt="Screen Shot 2024-02-22 at 2 06 42 PM" src="https://github.com/KyleBD/SecuritiesAnalysis/assets/114958251/75343536-f351-40b8-bc58-97a17b5c34cf"><br>
 Figure 1: Simulated Returns from companies on the S&P 500 over a 100 day inveral using 1000 simulations.
 
