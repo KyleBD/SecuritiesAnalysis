@@ -1,5 +1,4 @@
-from flask import Flask, render_template
-from blueprint import bp
+from flask import Flask, render_template, request
 import base64
 from io import BytesIO
 from flask import Flask
@@ -7,20 +6,35 @@ from matplotlib.figure import Figure
 from get_tickers.portfolioMCSimulation import main
 
 
+
 app = Flask(__name__)
 #app.register_blueprint(bp, url_prefix="/")
-
 @app.route("/")
 def home():
-    # Generate the figure **without using pyplot**.
+    return("THIS IS THE HOME PAGE")
+
+@app.route("/MC_Simulation")
+def MC_simulation():
     simulatedPortfolio = main(['GME', 'SU'])
     meanReturns = simulatedPortfolio.simulatedReturns.tolist()
     fig = Figure()
     ax = fig.subplots()
     ax.plot(meanReturns)
-    # Save it to a temporary buffer.
+
     buf = BytesIO()
     fig.savefig(buf, format="png")
-    # Embed the result in the html output.
+
     data = base64.b64encode(buf.getbuffer()).decode("ascii")
     return f"<img src='data:image/png;base64,{data}'/>"
+
+@app.route("/input_stocks")
+def get_stock_input():
+    return render_template('index.html')
+
+@app.route('/process_form', methods=['POST'])
+def process_form():
+    num_inputs = int(request.form['num_inputs'])
+    inputs = [request.form[f'input_{i}'] for i in range(1, num_inputs+1)]
+    # Process the inputs here
+    print(inputs)
+    return "Inputs received successfully!"

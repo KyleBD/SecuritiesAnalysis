@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Input Boxes</title>
+</head>
+<body>
+    <h1>Dynamic Input Boxes</h1>
+    <form action="/process_form" method="post">
+        <label for="num_inputs">Number of Strings:</label>
+        <input type="number" id="num_inputs" name="num_inputs" min="1" value="1" onchange="updateInputs()">
+        <div id="input_boxes">
+            <input type="text" name="input_1" placeholder="Enter string 1">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function updateInputs() {
+            var numInputs = document.getElementById('num_inputs').value;
+            var inputBoxesDiv = document.getElementById('input_boxes');
+            inputBoxesDiv.innerHTML = '';
+
+            for (var i = 1; i <= numInputs; i++) {
+                var input = document.createElement('input');
+                input.type = 'text';
+                input.name = 'input_' + i;
+                input.placeholder = 'Enter string ' + i;
+                inputBoxesDiv.appendChild(input);
+                inputBoxesDiv.appendChild(document.createElement('br'));
+            }
+        }
+    </script>
+</body>
+</html>
