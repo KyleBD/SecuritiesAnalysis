@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import yfinance as yf
 
-from getTickers import getSPFhundered
+#from getTickers import getSPFhundered
 
 yf.pdr_override()
 
@@ -87,25 +87,26 @@ def conditionalValueAtRisk(returns, alpha =5):
         raise TypeError("Expected a data series input")
 
 
-
-
-def main():
-    endDate = dt.datetime.now()
-    startDate = endDate - dt.timedelta(days=300)
-    simulatedPortfolio = SimulatePortfolio(stocks=stocks, start=startDate, end=endDate)
-
-    plt.plot(simulatedPortfolio.simulatedReturns)
+def terminalOut(results):
+    plt.plot(results)
     plt.xlabel('Time (Days)')
     plt.ylabel('Portfolio Value (CAD)')
     plt.title('Monte Carlo sim of given portfolio')
     plt.show()
 
-    portfolioResults = pd.Series(simulatedPortfolio.simulatedReturns[-1,:])
+    portfolioResults = pd.Series(results[-1,:])
 
     totalVaR = initialPortfolioVal -  valueAtRisk(portfolioResults, alpha=5)
     conditionalVaR = initialPortfolioVal - conditionalValueAtRisk(portfolioResults, alpha=5)
-    avgReturn = simulatedPortfolio.returnsPerformance * initialPortfolioVal
+    avgReturn = results * initialPortfolioVal
     print(f"The average return of the portfolio is ${round(avgReturn,2)} \nThe VaR of the given portfolio is ${round(totalVaR,2)} \nThe CVaR of the portfolio is ${round(conditionalVaR, 2)}")
 
-if __name__ == '__main__':
-    main()
+
+def main(args):
+    endDate = dt.datetime.now()
+    startDate = endDate - dt.timedelta(days=300)
+    simulatedPortfolio = SimulatePortfolio(stocks=args, start=startDate, end=endDate)
+
+    return simulatedPortfolio
+
+
