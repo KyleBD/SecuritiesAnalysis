@@ -7,7 +7,7 @@ Why use the Monte Carlo simulation? The simple answer is that the market does no
 Figure 1: Simulated Returns from companies on the S&P 500 over a 100 day inveral using 1000 simulations.
 
 ## VaR and CVaR
-Gives a value for the value at risk over a chosen confidence interval. In the case of my testing I have set it at a 5% confidence interval to get the worst 5% of cases returned as the VaR. Then to find my CVaR i take all of the values that are bellow the VaR that was calculated.
+Gives a value for the value at risk over a chosen confidence interval. In the case of my testing I have set it at a 5% confidence interval to get the worst 5% of cases returned as the VaR. Then to find my CVaR i take all of the values that are bellow the VaR that was calculated.<br>
 <img width="377" alt="Screen Shot 2024-02-22 at 2 07 09 PM" src="https://github.com/KyleBD/SecuritiesAnalysis/assets/114958251/b6bf8c45-5f8f-4eb5-8649-c4ea0a88ffb1"><br>
 Figure 2: Mean estimated returns from simulation in Fig. 1 as well as VaR and CVaR from same simulation.
 
