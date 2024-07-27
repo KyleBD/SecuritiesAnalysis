@@ -12,7 +12,7 @@ yf.pdr_override()
 
 # ==============Define global variables============
 MonteCarloSims = 1000
-stocks = ['TSLA', 'GME']
+stocks = ['SU', 'CNQ']
 #stocks = getSPFhundered()
 simTimeFrame = 50
 initialPortfolioVal = 10000 #Initial value in dollars.
@@ -109,4 +109,8 @@ def main(args):
 
     return simulatedPortfolio
 
+
+if __name__ == '__main__':
+    test = main(stocks)
+    terminalOut(test.simulatedReturns)
 
