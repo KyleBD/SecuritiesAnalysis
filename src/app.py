@@ -5,6 +5,9 @@ from flask import Flask
 from matplotlib.figure import Figure
 from get_tickers.portfolioMCSimulation import main
 
+"""
+Leverage w/ flask fun app.py in the src dir
+"""
 
 
 app = Flask(__name__)
